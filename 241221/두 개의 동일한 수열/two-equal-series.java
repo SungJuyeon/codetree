@@ -21,8 +21,10 @@ public class Main {
         for(int i=0; i<N; i++){
             if(a[i] != b[i])
                 System.out.println("No");
+                return;
             if(a[i] == b[i] && i == N-1){
                 System.out.println("Yes");
+                return;
             }
         }
     }
