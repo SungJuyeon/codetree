@@ -18,14 +18,14 @@ public class Main {
         
         Arrays.sort(a);
         Arrays.sort(b);
+
+        boolean isSame = true;
         for(int i=0; i<N; i++){
-            if(a[i] != b[i])
-                System.out.println("No");
-                return;
-            if(a[i] == b[i] && i == N-1){
-                System.out.println("Yes");
-                return;
+            if(a[i] != b[i]) {
+                isSame=false;
+                break;
             }
         }
+        System.out.println(isSame ? "Yes" : "No");
     }
 }
