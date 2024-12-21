@@ -15,8 +15,8 @@ public class Main {
         Arrays.sort(input);
         int max=0;
         for(int i=0; i<N; i++){
-            if(max < input[i] + input[N*2-i-1])
-                max = input[i] + input[N*2-i-1];
+            int sum = input[i] + input[N*2-i-1];
+            max = Math.max(max, sum);
         }
         System.out.println(max);
         sc.close();
