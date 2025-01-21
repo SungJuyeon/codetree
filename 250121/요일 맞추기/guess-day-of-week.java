@@ -11,13 +11,12 @@ public class Main {
         int m2 = sc.nextInt();
         int d2 = sc.nextInt();
         int days_of_seven = 1;
-
         int one = cal_day(m1, d1, days);
         int two = cal_day(m2, d2, days);
 
-        int result = (two - one) % 7;
-        System.out.println(days_eng[result+1]);
-
+        //int result = (two - one) % 7;  -> 런타임 에러
+        int result = (days_of_seven + (two-one) % 7 + 7) % 7;
+        System.out.println(days_eng[result]);
         // 시간 초과
         // while(true){
         //     if(m1 == m2 && d1 == d2){
