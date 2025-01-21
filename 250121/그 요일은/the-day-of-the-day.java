@@ -22,7 +22,7 @@ public class Main {
         int one = cal_day(m1, d1, days);
         int two = cal_day(m2, d2, days);
         
-        int result = (two - one) / 7 + (day_a % 7) / 5;
+        int result = (two - one) / 7 + (two - one) % 7 / 5;
 
         System.out.println(result);
     }
