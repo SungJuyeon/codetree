@@ -18,18 +18,18 @@ public class Main {
             int x = sc.nextInt();
             char c = sc.next().charAt(0);
             if(c == 'L') {
-                for(int p=x; p>0; p--){
-                    visited[cur] = 1;
-                    cntW[cur]++;
-                    if(p > 1) cur--;
+                for(int p=cur; p>cur-x; p--){
+                    visited[p] = 1;
+                    cntW[p]++;
                 }
+                cur = cur-x +1;
             }
-            else {
-                for(int p=0; p<x; p++){
-                    visited[cur] = 2;
-                    cntB[cur]++;
-                    if(p < x-1) cur++;
+            else {  //오른쪽 
+                for(int p=cur; p<cur+x; p++){
+                    visited[p] = 2;
+                    cntB[p]++;
                 }
+                cur = cur+x - 1;
             }
         }
 
