@@ -18,17 +18,17 @@ public class Main {
             int x = sc.nextInt();
             char c = sc.next().charAt(0);
             if(c == 'L') {
-                while(x-- > 0) {
+                for(int p=x; p>0; p--){
                     visited[cur] = 1;
                     cntW[cur]++;
-                    if(x > 0) cur--;
+                    if(p > 1) cur--;
                 }
             }
             else {
-                while(x-- > 0) {
+                for(int p=0; p<x; p++){
                     visited[cur] = 2;
                     cntB[cur]++;
-                    if(x > 0) cur++;
+                    if(p < x-1) cur++;
                 }
             }
         }
