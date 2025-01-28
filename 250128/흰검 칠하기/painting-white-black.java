@@ -1,43 +1,44 @@
-import java.util.*;
-import java.io.*;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int n = Integer.parseInt(br.readLine());
-        int offset = 10000; //offset
-        int[] visited = new int[offset*2]; 
-        int[] cntB = new int[offset*2];
-        int[] cntW = new int[offset*2];
+    public static int offset = 100000;
+    
+    public static int n;
+    public static int[] visited = new int[2 * offset + 1];
+    public static int[] cntB = new int[2 * offset + 1];
+    public static int[] cntW = new int[2 * offset + 1];
+    public static int b, w, g;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+
         int cur = offset;
-
-        for(int i =0; i<n; i++){
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int x = Integer.parseInt(st.nextToken());
-            String pos = st.nextToken();
-
-            if(pos.equals("L")){ //white
-                for (int j = 0; j < x; j++) {
+        for(int i = 1; i <= n; i++) {
+            int x = sc.nextInt();
+            char c = sc.next().charAt(0);
+            if(c == 'L') {
+                while(x-- > 0) {
                     visited[cur] = 1;
                     cntW[cur]++;
-                    if (j < x - 1) cur--;  // x가 1보다 클 때만 cur을 갱신
+                    if(x > 0) cur--;
                 }
-            } else if(pos.equals("R")){ //black
-                for (int j = 0; j < x; j++) {
+            }
+            else {
+                while(x-- > 0) {
                     visited[cur] = 2;
                     cntB[cur]++;
-                    if (j < x - 1) cur++;  // x가 1보다 클 때만 cur을 갱신
+                    if(x > 0) cur++;
                 }
             }
         }
-        int w =0, b=0, g=0;
-        for (int i = 0; i < visited.length; i++) {
-            if (cntB[i] >= 2 && cntW[i] >= 2) g++;
-            else if (visited[i] == 1) w++;
-            else if (visited[i] == 2) b++;
+
+        for(int i = 0; i <= 2 * offset; i++) {
+            if(cntB[i] >= 2 && cntW[i] >= 2) g++;
+            else if(visited[i] == 1) w++;
+            else if(visited[i] == 2) b++;
         }
-        bw.write(w + " "+ b + " "+ g);
-        bw.close();
+
+        System.out.print(w + " " + b + " " + g);
     }
 }
