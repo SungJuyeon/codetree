@@ -46,6 +46,23 @@ public class Main {
                 }
             }
         }
+
+        for(int i = minY; i < maxY; i++){
+            emp = false;
+            for(int j = minX; j < maxX; j++){
+                if(grid[j][i] == 1){
+                    emp=true;
+                    break;
+                }
+            }
+
+            if(emp == false){
+                if(grid[minX][i-1] == 0){
+                    minY = i;
+                }else maxY = i;
+            }
+        }
+
         int result = (maxX - minX) * (maxY - minY);
         System.out.println(result);
         sc.close();
