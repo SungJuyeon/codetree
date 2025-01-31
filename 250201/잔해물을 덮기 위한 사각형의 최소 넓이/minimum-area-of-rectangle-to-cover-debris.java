@@ -2,68 +2,60 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        int offset = 1000;
         Scanner sc = new Scanner(System.in);
-        int[][] grid = new int[offset*2+1][offset*2+1];
-        int x1, x2, y1, y2;
-        int minX=0 , maxX=0 , minY=0 , maxY=0;
-        for(int i = 0; i < 2; i++){
-            x1 = sc.nextInt() + 1000;
-            y1 = sc.nextInt() + 1000;
-            x2 = sc.nextInt() + 1000;
-            y2 = sc.nextInt() + 1000;
-            if(i == 0){
-                minX = x1;
-                maxX = x2;
-                minY = y1;
-                maxY = y2;
-            }
-            for(int j = x1; j < x2; j++ ){
-                for(int k = y1; k < y2; k++){
-                    if(i == 0){
-                        grid[j][k] = 1;
-                        
-                    } else {
-                        grid[j][k] = 0;
-                    }
-                }
-            }
-        }
-        boolean emp = false;
-        for(int i = minX; i < maxX; i++){
-            emp = false;
-            for(int j = minY; j < maxY; j++){
-                if(grid[i][j] == 1){
-                    emp = true;
-                    break;
-                }
-            }
-            if(emp == false){
-                if(grid[i-1][minY] == 0){
-                    minX = i+1;
-                }else{
-                    maxX = i+1;
-                }
-            }
-        }
 
-        for(int i = minY; i < maxY; i++){
-            emp = false;
-            for(int j = minX; j < maxX; j++){
-                if(grid[j][i] == 1){
-                    emp=true;
-                    break;
-                }
-            }
+        // 첫 번째 사각형 좌표
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        int x2 = sc.nextInt();
+        int y2 = sc.nextInt();
 
-            if(emp == false){
-                if(grid[minX][i-1] == 0){
-                    minY = i;
-                }else maxY = i;
-            }
+        // 두 번째 사각형 좌표
+        int x3 = sc.nextInt();
+        int y3 = sc.nextInt();
+        int x4 = sc.nextInt();
+        int y4 = sc.nextInt();
+
+        // 첫 번째 사각형에서 두 번째 사각형을 뺀 후 남은 조각들의 최소 감싸는 사각형 찾기
+        int minX = Integer.MAX_VALUE, maxX = Integer.MIN_VALUE;
+        int minY = Integer.MAX_VALUE, maxY = Integer.MIN_VALUE;
+
+        // 사각형을 4개의 부분으로 나눠서 검사
+        // 1. 왼쪽 조각
+        if (x1 < x3) {
+            minX = Math.min(minX, x1);
+            maxX = Math.max(maxX, x3);
+            minY = Math.min(minY, y1);
+            maxY = Math.max(maxY, y2);
+        }
+        // 2. 오른쪽 조각
+        if (x2 > x4) {
+            minX = Math.min(minX, x4);
+            maxX = Math.max(maxX, x2);
+            minY = Math.min(minY, y1);
+            maxY = Math.max(maxY, y2);
+        }
+        // 3. 아래쪽 조각
+        if (y1 < y3) {
+            minX = Math.min(minX, x1);
+            maxX = Math.max(maxX, x2);
+            minY = Math.min(minY, y1);
+            maxY = Math.max(maxY, y3);
+        }
+        // 4. 위쪽 조각
+        if (y2 > y4) {
+            minX = Math.min(minX, x1);
+            maxX = Math.max(maxX, x2);
+            minY = Math.min(minY, y4);
+            maxY = Math.max(maxY, y2);
         }
 
-        int result = (maxX - minX) * (maxY - minY);
+        // 남은 영역이 없으면 넓이 0
+        int result = 0;
+        if (minX < maxX && minY < maxY) {
+            result = (maxX - minX) * (maxY - minY);
+        }
+
         System.out.println(result);
         sc.close();
     }
