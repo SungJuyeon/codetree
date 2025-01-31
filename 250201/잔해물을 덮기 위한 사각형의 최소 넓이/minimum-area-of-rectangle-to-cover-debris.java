@@ -2,59 +2,49 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        int offset = 1000;
         Scanner sc = new Scanner(System.in);
+        int[][] grid = new int[offset*2+1][offset*2+1];
+        int x1, x2, y1, y2;
+        int x3, x4, y3, y4;
+        x1 = sc.nextInt() + offset;
+        y1 = sc.nextInt() + offset;
+        x2 = sc.nextInt() + offset;
+        y2 = sc.nextInt() + offset;
 
-        // 첫 번째 사각형 좌표
-        int x1 = sc.nextInt();
-        int y1 = sc.nextInt();
-        int x2 = sc.nextInt();
-        int y2 = sc.nextInt();
-
-        // 두 번째 사각형 좌표
-        int x3 = sc.nextInt();
-        int y3 = sc.nextInt();
-        int x4 = sc.nextInt();
-        int y4 = sc.nextInt();
-
-        // 첫 번째 사각형에서 두 번째 사각형을 뺀 후 남은 조각들의 최소 감싸는 사각형 찾기
-        int minX = Integer.MAX_VALUE, maxX = Integer.MIN_VALUE;
-        int minY = Integer.MAX_VALUE, maxY = Integer.MIN_VALUE;
-
-        // 사각형을 4개의 부분으로 나눠서 검사
-        // 1. 왼쪽 조각
-        if (x1 < x3) {
-            minX = Math.min(minX, x1);
-            maxX = Math.max(maxX, x3);
-            minY = Math.min(minY, y1);
-            maxY = Math.max(maxY, y2);
+        x3 = sc.nextInt() + offset;
+        y3 = sc.nextInt() + offset;
+        x4 = sc.nextInt() + offset;
+        y4 = sc.nextInt() + offset;
+        for(int j = x1; j < x2; j++ ){
+            for(int k = y1; k < y2; k++){
+                grid[j][k] = 1;
+            }
         }
-        // 2. 오른쪽 조각
-        if (x2 > x4) {
-            minX = Math.min(minX, x4);
-            maxX = Math.max(maxX, x2);
-            minY = Math.min(minY, y1);
-            maxY = Math.max(maxY, y2);
+        for(int j = x3; j < x4; j++ ){
+            for(int k = y3; k < y4; k++){
+                if(grid[j][k] == 1)
+                    grid[j][k] = 0;
+            }
         }
-        // 3. 아래쪽 조각
-        if (y1 < y3) {
-            minX = Math.min(minX, x1);
-            maxX = Math.max(maxX, x2);
-            minY = Math.min(minY, y1);
-            maxY = Math.max(maxY, y3);
-        }
-        // 4. 위쪽 조각
-        if (y2 > y4) {
-            minX = Math.min(minX, x1);
-            maxX = Math.max(maxX, x2);
-            minY = Math.min(minY, y4);
-            maxY = Math.max(maxY, y2);
-        }
+        int minX = offset*2+1, maxX = offset, minY = offset*2+1, maxY= offset;
 
-        // 남은 영역이 없으면 넓이 0
+        boolean hasRemaining = false;
+        for(int i = x1; i < x2; i++){
+            for(int j = y1; j < y2; j++){
+                if(grid[i][j] == 1){
+                    hasRemaining = true;
+                    if(grid[i-1][j] == 0) { if(i < minX) minX = i;}
+                    else if (grid[i-1][j] == 1) { if(i > maxX) maxX = i;}
+                    if(grid[i][j-1] == 0) { if( j < minY) minY = j;}
+                    else if (grid[i][j-1] == 1) { if(j > maxY) maxY = j;}
+                }
+            }
+        }
         int result = 0;
-        if (minX < maxX && minY < maxY) {
-            result = (maxX - minX) * (maxY - minY);
-        }
+        
+        if(hasRemaining == false) result = 0; 
+        else { result = (maxX - minX +1) * (maxY - minY +1); }
 
         System.out.println(result);
         sc.close();
