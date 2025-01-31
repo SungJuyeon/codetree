@@ -37,7 +37,7 @@ public class Main {
                     break;
                 }
             }
-            if(emp = false){
+            if(emp == false){
                 maxX=i;
                 break;
             }
