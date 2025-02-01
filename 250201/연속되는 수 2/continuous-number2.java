@@ -14,7 +14,7 @@ public class Main {
 
             if(i == 0 || list[i] == list[i-1]){
                 cnt++;
-            } else if (list[i] != list[i-1]){
+            } else {
                 result = Math.max(result, cnt);
                 cnt = 1;
 
