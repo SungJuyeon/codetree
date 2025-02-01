@@ -11,9 +11,9 @@ public class Main {
         for(int i = 0 ; i < n; i++){
             list[i] = sc.nextInt();
 
-            if(i == 0 || list[i] != list[i-1]){
+            if(i == 0 || list[i] == list[i-1]){
                 cnt++;
-            }   
+            }
         }
         System.out.print(cnt);
         sc.close();
