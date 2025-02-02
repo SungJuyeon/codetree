@@ -21,7 +21,7 @@ public class Main {
             }
             curA += t;
         }
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < m; i++){
             int t = sc.nextInt();
             char d = sc.next().charAt(0);
 
@@ -31,8 +31,20 @@ public class Main {
             curB += t;
         }
         int cnt = 0;
-        int maxTime = Math.max(curA, curB);
+        int maxTime =0;
+        if(curA > curB){
+            maxTime = curA;
+            for(int c = curB+1; c <= maxTime; c++){
+                posB[c] = posB[c-1];
+            }
+        } else if(curA < curB){
+            maxTime = curB;
+            for(int c = curA+1; c <= maxTime; c++){
+                posA[c] = posA[c-1];
+            }
+        }
         for(int i = 1; i<=maxTime; i++){
+
             if(posA[i] == posB[i] && posA[i-1] != posB[i-1]){
                 cnt++;
             }
