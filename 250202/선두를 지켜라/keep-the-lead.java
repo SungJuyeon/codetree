@@ -32,11 +32,11 @@ public class Main {
         }
         int maxTime = Math.max(curTimeA, curTimeB);
         int cnt = 0;
-        for(int j = 1; j <= maxTime; j++){
+        for(int j = 2; j <= maxTime; j++){  //j=1 이면, movA[0] == movB[0] 이 되므로 j=2부터 시작하거나, 'cnt값 -1' 출력 
             if(movA[j] > movB[j] && (movA[j-1] < movB[j-1] || movA[j-1] == movB[j-1]) ) cnt++;
             else if(movA[j] < movB[j] && (movA[j-1] > movB[j-1] || movA[j-1] == movB[j-1])) cnt++;
         }
-        System.out.print(cnt-1);
+        System.out.print(cnt);
 
     }
 }
