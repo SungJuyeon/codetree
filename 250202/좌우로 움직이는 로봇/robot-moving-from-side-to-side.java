@@ -34,17 +34,17 @@ public class Main {
         int maxTime =0;
         if(curA > curB){
             maxTime = curA;
-            for(int c = curB+1; c <= maxTime; c++){
+            for(int c = curB; c < maxTime+1; c++){
                 posB[c] = posB[c-1];
             }
         } else if(curA < curB){
             maxTime = curB;
-            for(int c = curA+1; c <= maxTime; c++){
+            for(int c = curA; c < maxTime+1; c++){
                 posA[c] = posA[c-1];
             }
         }
-        for(int i = 1; i<=maxTime; i++){
 
+        for(int i = 1; i<=maxTime; i++){
             if(posA[i] == posB[i] && posA[i-1] != posB[i-1]){
                 cnt++;
             }
