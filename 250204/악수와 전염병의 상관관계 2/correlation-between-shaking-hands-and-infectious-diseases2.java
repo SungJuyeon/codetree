@@ -12,8 +12,8 @@ public class Main {
         int[] result = new int[n+1];
         result[p] = 1;
         int[] k_cnt = new int[n+1];
-        int[] xTime = new int[MAX_T];
-        int[] yTime = new int[MAX_T];
+        int[] xTime = new int[MAX_T+1];
+        int[] yTime = new int[MAX_T+1];
 
         for(int i = 0; i < t; i++){
             int time = sc.nextInt();
