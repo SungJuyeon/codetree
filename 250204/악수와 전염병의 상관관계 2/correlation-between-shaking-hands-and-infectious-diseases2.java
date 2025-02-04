@@ -25,24 +25,16 @@ public class Main {
         }
 
         for(int j = 1; j < MAX_T+1; j++){
-            if(result[xTime[j]] == 1 && result[yTime[j]] == 0) {
-                if(k_cnt[xTime[j]] == k) {
-                    break;
-                }   
+            if(result[xTime[j]] == 1 && result[yTime[j]] == 0 && k_cnt[xTime[j]] < k) {
                 result[yTime[j]] = 1;
                 k_cnt[xTime[j]]++;
-            } else if(result[xTime[j]] == 0 && result[yTime[j]] == 1){
-                if(k_cnt[yTime[j]] == k) {
-                    break;
-                }
+            } else if(result[xTime[j]] == 0 && result[yTime[j]] == 1 && k_cnt[yTime[j]] < k){
                 result[xTime[j]] = 1;
                 k_cnt[yTime[j]]++;
             } else if(result[xTime[j]] == 1 && result[yTime[j]] == 1){
-                if(k_cnt[xTime[j]] == k && k_cnt[yTime[j]] == k) {
-                    break;
-                }
-                k_cnt[xTime[j]]++;
                 k_cnt[yTime[j]]++;
+                k_cnt[xTime[j]]++;
+                
             }
             
         }
