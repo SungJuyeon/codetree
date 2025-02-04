@@ -11,7 +11,7 @@ public class Main {
 
         int[] result = new int[n+1];
         result[p] = 1;
-        int k_cnt = 0;
+        int[] k_cnt = new int[n+1];
         int[] xTime = new int[MAX_T];
         int[] yTime = new int[MAX_T];
 
@@ -25,19 +25,19 @@ public class Main {
         }
 
         for(int j = 0; j < MAX_T; j++){
-            if(k_cnt == k) {
-                for(int i = 1; i < n+1; i++){
-                    System.out.print(result[i]);
-                }
-                return;
+            if(k_cnt[xTime[j]] == k || k_cnt[yTime[j]] == k) {
+                break;
             }
             
             if(result[xTime[j]] == 1 && result[yTime[j]] == 0) {
                 result[yTime[j]] = 1;
-                k_cnt++;
+                k_cnt[xTime[j]]++;
             } else if(result[xTime[j]] == 0 && result[yTime[j]] == 1){
                 result[xTime[j]] = 1;
-                k_cnt++;
+                k_cnt[yTime[j]]++;
+            } else if(result[xTime[j]] == 1 && result[yTime[j]] == 1){
+                k_cnt[xTime[j]]++;
+                k_cnt[yTime[j]]++;
             }
             
         }
