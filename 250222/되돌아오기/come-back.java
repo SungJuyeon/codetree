@@ -16,22 +16,22 @@ public class Main {
             if(pos == 'W'){ //서
                 posit = 0;
             } else if(pos == 'S') { //남
-                posit = 2;
-            }else if(pos == 'N'){ //북
-                posit = 3;
-            } else {    //E 동
                 posit = 1;
+            }else if(pos == 'N'){ //북
+                posit = 2;
+            } else {    //E 동
+                posit = 3;
             }
 
             for(int t=0; t<mov; t++){
                 x += arrx[posit];
-                y += arrx[posit];
-
+                y += arry[posit];
+                result++;
                 if(x == 0 && y == 0){
                     System.out.print(result);
                     return;
                 }
-                result++;
+                
             }
         }
         System.out.print("-1");
