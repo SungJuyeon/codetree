@@ -7,7 +7,7 @@ public class Main {
         for (int i = 0; i < 6; i++) {
             ability[i] = sc.nextInt();
         }
-        int min = 100;
+        int min = Integer.MAX_VALUE;
         int sum = 0;
         for(int i = 0; i<6; i++){
             sum += ability[i];
