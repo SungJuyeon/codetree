@@ -10,6 +10,7 @@ public class Main {
 
         for(int i = x; i <= y; i++){
             int num = 0;
+            boolean one = false;
             String st = Integer.toString(i);
 
             for(int p = 0; p < arr.length; p++){
@@ -22,10 +23,11 @@ public class Main {
 
             for(int k = 0; k < arr.length; k++){
                 if(arr[k] > 0) {
+                    if(arr[k] == 1) one = true;
                     num++;
                 }
             }
-            if(num == 2) result++;
+            if(num == 2 && one == true) result++;
             
         }
         System.out.println(result);
