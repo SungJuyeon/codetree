@@ -22,12 +22,11 @@ public class Main {
             }
 
             for(int k = 0; k < arr.length; k++){
-                if(arr[k] > 0) {
-                    if(arr[k] == 1) one = true;
-                    num++;
+                if(arr[k] == st.length() -1) {
+                    one = true;
                 }
             }
-            if(num == 2 && one == true) result++;
+            if(one == true) result++;
             
         }
         System.out.println(result);
