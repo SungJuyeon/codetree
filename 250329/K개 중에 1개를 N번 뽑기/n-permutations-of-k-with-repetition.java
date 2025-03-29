@@ -25,11 +25,7 @@ public class Main {
         k = sc.nextInt();
         n = sc.nextInt();
         
-        for(int i = 1; i <= k; i++){
-            arr.add(i);
-            binary(i);
-            arr.remove(arr.size() - n + 1);
-        }
+        binary(1);
 
         return;
     }
