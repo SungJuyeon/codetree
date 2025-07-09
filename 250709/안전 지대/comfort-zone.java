@@ -19,9 +19,9 @@ public class Main {
             }
         }
         int maxSafe = 0;
-        int bestK = 0;
+        int bestK = 1;
 
-        for(int k = 0; k < maxHeight; k++){
+        for(int k = 1; k <= maxHeight; k++){
             visited = new boolean[n][m];
             int areaCount = 0;
             for(int i = 0; i < n; i++)
@@ -30,9 +30,12 @@ public class Main {
                         DFS(i, j, k);
                         areaCount++;
                     }
-            if(areaCount >= maxSafe) {
+
+            if(areaCount > maxSafe) { //makSafe 보다 큰 areaCount 대신, 값이 같으면 k가 작은 게 출력되어야함
                 maxSafe = areaCount;
-                if(bestK <= k) bestK = k;
+                bestK = k;
+            } else if(areaCount == maxSafe){
+                bestK = Math.min(bestK, k);
             }
         }
 
