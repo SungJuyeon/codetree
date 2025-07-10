@@ -31,8 +31,14 @@ public class Main {
         }
         
         for (int i = 0; i < k; i++) {
-            q.add(new Pair(starts[i][0], starts[i][1]));
-            BFS(starts[i][0], starts[i][1]);
+            int x = starts[i][0];
+            int y = starts[i][1];
+            if(canGo(x,y)) {
+                q.add(new Pair(x,y));
+                visited[x][y] = true;
+                answer++;
+                BFS(x, y);
+            }
         }
         System.out.println(answer);
     }
