@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 class Pair {
     int x, y;
@@ -7,15 +7,15 @@ class Pair {
         this.y = y;
     }
 }
-
 public class Main {
+    public static final int INT_MAX = Integer.MAX_VALUE;
     static int N;
     static char[][] grid;
-    static Pair start, end;
-    static Map<Integer, Pair> coins = new TreeMap<>(); // 숫자 순서대로
+    static ArrayList<Pair> coinPos = new ArrayList<>();
+    static ArrayList<Pair> selectedPos = new ArrayList<>();
 
-    static int[] dx = {0, 0, 1, -1};
-    static int[] dy = {1, -1, 0, 0};
+    static Pair startPos;
+    static Pair endPos;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -24,76 +24,54 @@ public class Main {
 
         for (int i = 0; i < N; i++) {
             String line = sc.next();
-            for (int j = 0; j < N; j++) {
+            for(int j = 0; j < N; j++) {
                 grid[i][j] = line.charAt(j);
-                if (grid[i][j] == 'S') start = new Pair(i, j);
+                if(grid[i][j] == 'S') start = new Pair(i, j);
                 else if (grid[i][j] == 'E') end = new Pair(i, j);
-                else if (Character.isDigit(grid[i][j])) {
-                    int val = grid[i][j] - '0';
-                    coins.put(val, new Pair(i, j));
+            }
+        }
+        
+        //동전을 오름차순으로 저장
+        for(int num = 1; num <=9; num++) {
+            for(int i = 0; i < N; i++) {
+                for(int j = 0; j < N; j++){
+                    if(grid[i][j] == num + '0')
+                        coinPos.add(new Pair(i, j));
                 }
             }
         }
+        findMinMoves(0,0);
 
-        int answer = Integer.MAX_VALUE;
-        List<Integer> coinNums = new ArrayList<>(coins.keySet());
-
-        for (int len = 3; len <= coinNums.size(); len++) {
-            List<Integer> sub = coinNums.subList(0, len);
-            List<Pair> path = new ArrayList<>();
-            path.add(start);
-            for (int coin : sub)
-                path.add(coins.get(coin));
-            path.add(end);
-
-            int totalDist = 0;
-            boolean reachable = true;
-
-            for (int i = 0; i < path.size() - 1; i++) {
-                int d = bfs(path.get(i), path.get(i + 1));
-                if (d == -1) {
-                    reachable = false;
-                    break;
-                }
-                totalDist += d;
-            }
-
-            if (reachable) answer = Math.min(answer, totalDist);
-        }
-
-        System.out.println(answer == Integer.MAX_VALUE ? -1 : answer);
+        if(ans == INT_MAX) ans = -1;
+        System.out.print(ans);
+        
     }
 
-    // BFS 거리 계산
-    public static int bfs(Pair from, Pair to) {
-        Queue<Pair> q = new LinkedList<>();
-        boolean[][] visited = new boolean[N][N];
-        q.add(from);
-        visited[from.x][from.y] = true;
-
-        int level = 0;
-        while (!q.isEmpty()) {
-            int size = q.size();
-            for (int s = 0; s < size; s++) {
-                Pair curr = q.poll();
-                if (curr.x == to.x && curr.y == to.y)
-                    return level;
-
-                for (int d = 0; d < 4; d++) {
-                    int nx = curr.x + dx[d];
-                    int ny = curr.y + dy[d];
-                    if (inRange(nx, ny) && !visited[nx][ny] && grid[nx][ny] != '#') {
-                        visited[nx][ny] = true;
-                        q.add(new Pair(nx, ny));
-                    }
-                }
-            }
-            level++;
+    public static void findMinMoves(int curr, int cnt) {
+        if(cnt == m) {
+            ans = Math.min(ans, calc());
+            return;
         }
-        return -1;
+
+        if(curr == (int)coinPos.size()) return;
     }
 
-    public static boolean inRange(int x, int y) {
-        return x >= 0 && x < N && y >= 0 && y < N;
+    public static int calc() {
+        int moves = dist(startPos, selectedPos.get(0));
+        for(int i = 0; i < m - 1; i++)
+            moves += dist(selectedPos.get(i), selectedPos.get(i+1));
+        moves += dist(selectedPos.get(m-1), endPos);
+
+        return moves;
+    }
+
+    public static int dist(Pair a, Pair b) {
+        int ax = a.x;
+        int ay = a.y;
+
+        int bx = b.x;
+        int by = b.y;
+        
+        return Math.abs(ax - bx) + Math.abs(ay - by);
     }
 }
