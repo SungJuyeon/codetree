@@ -59,15 +59,17 @@ public class Main {
     }
     public static boolean update(Pair maxP, Pair newP){
         if(maxP.x == -1 && maxP.y == -1) return true;
-        int maxX = maxP.x;
-        int maxY = maxP.y;
-        int newX = newP.x;
-        int newY = newP.y;
+        int currGrid = grid[maxP.x][maxP.y];
+        int newGrid = grid[newP.x][newP.y];
 
-        if(grid[newX][newY] != grid[maxX][maxY])
-            return grid[newX][newY] > grid[maxX][maxY];
-        if(-newX != -maxX) return -newX > -maxX;
-        return -newY > -maxY;
+        //값이 더 큰 경우
+        if (newGrid != currGrid) return newGrid > currGrid;
+
+        //행이 더 작은 경우
+        if(newP.x != maxP.x) return newP.x < maxP.x;
+
+        //열이 더 작은 경우
+        return newP.y < maxP.y;
     }
 
     public static boolean move() {
