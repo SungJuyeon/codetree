@@ -11,7 +11,8 @@ class Pair {
 public class Main {
     public static final int INT_MAX = Integer.MAX_VALUE;
     static int N;
-    public static int m = 3;
+    static int m = 3;
+
     static char[][] grid;
     static ArrayList<Pair> coinPos = new ArrayList<>();
     static ArrayList<Pair> selectedPos = new ArrayList<>();
@@ -30,7 +31,7 @@ public class Main {
             for(int j = 0; j < N; j++) {
                 grid[i][j] = line.charAt(j);
                 if(grid[i][j] == 'S') startPos = new Pair(i, j);
-                else if (grid[i][j] == 'E') endPos = new Pair(i, j);
+                if (grid[i][j] == 'E') endPos = new Pair(i, j);
             }
         }
         
@@ -57,6 +58,11 @@ public class Main {
         }
 
         if(curr == (int)coinPos.size()) return;
+        findMinMoves(curr+1, cnt);
+
+        selectedPos.add(coinPos.get(curr));
+        findMinMoves(curr + 1, cnt+ 1);
+        selectedPos.remove(selectedPos.size() - 1);
     }
 
     public static int calc() {
