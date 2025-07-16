@@ -1,34 +1,28 @@
 import java.util.Scanner;
+import java.util.Arrays;
 public class Main {
-    public static int ans = 0;
+    public static long[] list;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 
-        step(n);
-        System.out.print(ans);
+        list = new long[n+1];
+        Arrays.fill(list, -1);
+
+        System.out.print(step(n));
     }
 
-    public static void step(int n) {
-        if(n == 2 || n == 3) {
-            ans = 1;
-            return;
-        }
-        if(n == 1) return;
+    public static long step(int n) {
+        if(n < 0) return 0;
+        else if(n == 0) return 1;
+        else if( n == 1 ) return 0;
+        else if(n == 2 || n == 3) return 1;
         
-
-        if(n == 0) {
-            ans++;
-        }
+        if(list[n] != -1) {
+            return list[n];
+        } 
+        return list[n] = (step(n-2) + step(n-3)) % 10007;
         
-        if(n >= 2) {
-            n -= 2;
-            step(n);
-        }
-        if(n >= 3) {
-            n -= 3;
-            step(n);
-        }
-
     }
 }
