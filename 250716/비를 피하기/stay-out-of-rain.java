@@ -58,10 +58,23 @@ public class Main {
         while(!q.isEmpty()) {
             Pair curr = q.poll();
             int x= curr.x, y = curr.y;
-            
+            if(grid[x][y] == 3) return ans[x][y];
+
+            for(int i = 0; i < 4; i++){
+                int nx = x + dx[i], ny = y + dy[i];
+                if(inRange(nx,ny) && !visited[nx][ny]) {
+                    if(grid[nx][ny] == 1) continue;     
+                    else {
+                        visited[nx][ny] = true;
+                        ans[nx][ny] = ans[x][y] + 1;
+                        q.add(new Pair(nx, ny));
+                    }
+                }
+            }
+
         }
 
-        
+        return -1;
     }
 
     public static boolean inRange(int x, int y) {
