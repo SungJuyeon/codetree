@@ -12,7 +12,7 @@ public class Main {
     public static int n, h, m;
     public static int[][] grid;
     public static int[][] ans;
-    // public static ArrayList<Pair> person = new ArrayList<> ();
+    public static ArrayList<Pair> person = new ArrayList<> ();
     // public static ArrayList<Pair> place = new ArrayList<> ();
     // public static Queue<Pair> q = new LinkedList<> ();
     // public static boolean[][] visited;
@@ -29,15 +29,23 @@ public class Main {
         ans = new int[n][n];
 
         for (int i = 0; i < n; i++)
-            for (int j = 0; j < n; j++)
-                grid[i][j] = sc.nextInt();
-        
-        for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++) {
-                if (grid[i][j] == 2){
-                    ans[i][j] = bfs(i, j);
-                }
+                grid[i][j] = sc.nextInt();
+                if(grid[i][j] == 2)
+                    person.add(new Pair(i, j));
             }
+
+        for(int i = 0; i < person.size(); i++) {
+            Pair curr = person.get(i);
+            ans[curr.x][curr.y] = bfs(curr.x, curr.y);
+        }
+
+        // for (int i = 0; i < n; i++)
+        //     for (int j = 0; j < n; j++) {
+        //         if (grid[i][j] == 2){
+        //             ans[i][j] = bfs(i, j);
+        //         }
+        //     }
 
         for(int i = 0; i < n; i ++){
             for(int j = 0; j < n; j++) {
