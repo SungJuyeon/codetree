@@ -19,13 +19,14 @@ public class Main {
             int pivotIndex = partition(arr, low, high);
             quickSort(arr, low, pivotIndex - 1);
             quickSort(arr, pivotIndex + 1, high);
+        }
     }
 
     public static int partition(int[] arr, int low, int high) {
         int pivot = arr[high];
         int i = low - 1;
         for(int j = low; j < high; j++) {
-            if(arr[i] < pivot) {
+            if(arr[j] < pivot) {
                 i++;
                 swap(arr, i, j);
             }
