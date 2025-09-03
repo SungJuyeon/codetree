@@ -4,8 +4,6 @@ public class Main {
     public static int n,m,q;
     public static int[][] a;
 
-
-
     public static class Node {
         int row;
         char dir;
@@ -41,9 +39,7 @@ public class Main {
 
     public static void rotate(int[][] a, int r, char d) {
         Queue<Node> qn = new LinkedList<>();
-        boolean[] visited = new boolean[101];
         qn.add(new Node(r,d,0));
-        visited[r] = true;
 
         while(!qn.isEmpty()) {
             Node cur = qn.poll();
@@ -71,20 +67,14 @@ public class Main {
             // ud = 0 이면 up,down 방향
             // ud = 1 이면 up 방향 -> up 만 진행
             // ud = 2 이면 down 방향 -> down 만 진행
-            if(row > 0 && !visited[row-1]) {
-                if(ud == 0 || ud == 1) {
-                    if(existed(a[row], a[row-1])) {
-                        qn.add(new Node(row-1, LR(dir), 1));
-                        visited[row-1] = true;
-                    }
+            if(row > 0 && (ud == 0 || ud == 1)) {
+                if(existed(a[row], a[row-1])) {
+                    qn.add(new Node(row-1, LR(dir), 1));
                 }
             }
-            if(row < n-1 && !visited[row+1]) {
-                if(ud == 0 || ud == 2) {
-                    if(existed(a[row],a[row+1])) {
-                        qn.add(new Node(row+1, LR(dir), 2));
-                        visited[row+1] = true;
-                    }
+            if(row < n-1 && (ud == 0 || ud == 2)) {
+                if(existed(a[row],a[row+1])) {
+                    qn.add(new Node(row+1, LR(dir), 2));
                 }
             }
         }
