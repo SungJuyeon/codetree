@@ -14,8 +14,10 @@ public class Main {
         
         int ans = 0;
         for(int j = 1; j <= n; j++) {
-            int find = k - j;
-            if(m.containsKey(find)) ans++;
+            int find = k - m.get(j);
+            for(int kj = j+1; kj <=n; kj++) {
+                if(m.get(kj) == find) ans++;
+            }
         }
         System.out.println(ans);
     }
