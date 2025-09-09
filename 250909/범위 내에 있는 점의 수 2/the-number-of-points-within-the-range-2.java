@@ -19,7 +19,11 @@ public class Main {
             int a = sc.nextInt();
             int b = sc.nextInt();
 
-            System.out.println(points[b] - points[a-1]);
+            if (a == 0) {
+                System.out.println(points[b]);
+            } else {
+                System.out.println(points[b] - points[a-1]);
+            }
         }
     }
 }
