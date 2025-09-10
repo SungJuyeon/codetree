@@ -172,8 +172,8 @@ public class Main {
                 for(int j = 1; j <= m; j++) {
                 char c = s.charAt(j-1);
                 if(c=='a') arr[i][j] = 0;
-                if(c=='b') arr[i][j] = 1;
-                if(c=='c') arr[i][j] = 2;
+                else if(c=='b') arr[i][j] = 1;
+                else if(c=='c') arr[i][j] = 2;
             }
         }
 
