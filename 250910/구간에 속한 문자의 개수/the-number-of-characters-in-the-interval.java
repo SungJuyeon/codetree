@@ -188,7 +188,7 @@ public class Main {
             }
         }
 
-        for(int i = 0; i < k; i++) {
+        while(k-- > 0) {
             int x1 = sc.nextInt();
             int y1 = sc.nextInt();
             int x2 = sc.nextInt();
