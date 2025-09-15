@@ -9,17 +9,16 @@ class Pair implements Comparable<Pair> {
 
     @Override
     public int compareTo(Pair p) {
-        int d1 = this.x * this.x + this.y * this.y;
-        int d2 = p.x * p.x + p.y * p.y;
+        int d1 = this.x + this.y;
+        int d2 = p.x + p.y;
 
         if(d2 != d1){
             return d1 - d2;
-        } else {
-            if(this.x == p.x) {
-                return this.y - p.y;
-            }
+        }
+        if(this.x != p.x) {
             return this.x - p.x;
         }
+        return this.y - p.y;
     }
 }
 
