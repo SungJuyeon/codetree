@@ -67,7 +67,7 @@ public class Main {
         d.next = dNext;
     }
 
-    public staticvoid connect(Node preN, Node n) {
+    public static void connect(Node preN, Node n) {
         if(preN != null) preN.next = n;
         if(n != null) n.prev = preN;
     }
