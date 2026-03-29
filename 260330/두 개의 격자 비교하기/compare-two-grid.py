@@ -6,7 +6,7 @@ b = [list(map(int, input().split())) for _ in range(n)]
 diff = []
 for i in range(n):
     row = []
-    for j in range(n):
+    for j in range(m):
         if a[i][j] == b[i][j]:
             print('0 ', end = "")
         else:
